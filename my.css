@@ -1,4 +1,3 @@
-/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -195,7 +194,7 @@ textarea {
     border-top: 2px solid #ecf0f1;
 }
 
-/* Responsive Design - Mobile First */
+/* Responsive Design - Mobile */
 @media (max-width: 768px) {
     body {
         padding: 10px;
@@ -231,7 +230,7 @@ textarea {
     }
 
     input, select, textarea {
-        font-size: 16px; /* Prevents zoom on iOS */
+        font-size: 16px; 
     }
 
     button {
@@ -255,7 +254,7 @@ textarea {
     }
 }
 
-/* Desktop Specific Styles */
+/* Desktop Styles */
 @media (min-width: 769px) {
     body {
         padding: 40px;
