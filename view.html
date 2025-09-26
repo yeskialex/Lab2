@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Game Review</title>
+    <link rel="stylesheet" href="my.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Game Review Details</h1>
+
+    <div id="reviewDetails">
+        <!-- Content will be populated by JavaScript -->
+    </div>
+
+    <div class="action-buttons">
+        <button onclick="editReview()">Edit</button>
+        <button class="delete-btn" onclick="deleteReview()">Delete</button>
+        <button class="cancel-btn" onclick="window.location.href='index.html'">List</button>
+    </div>
+
+    <script>
+        // Game data (in a real application, this would come from a database)
+        const gameReviews = {
+            1: {
+                gameTitle: "The Legend of Zelda: Breath of the Wild",
+                platform: "Nintendo Switch",
+                genre: "Adventure",
+                releaseYear: 2017,
+                rating: 5,
+                reviewText: "An absolutely stunning open-world adventure that redefined what a Zelda game could be. The freedom to explore and experiment is unparalleled.",
+                reviewerName: "Alex Johnson",
+                reviewDate: "2023-06-15"
+            },
+            2: {
+                gameTitle: "Elden Ring",
+                platform: "PC",
+                genre: "RPG",
+                releaseYear: 2022,
+                rating: 5,
+                reviewText: "FromSoftware's masterpiece combines their signature challenging gameplay with an incredible open world. Every discovery feels rewarding.",
+                reviewerName: "Sarah Chen",
+                reviewDate: "2023-07-20"
+            },
+            3: {
+                gameTitle: "Cyberpunk 2077",
+                platform: "PS5",
+                genre: "RPG",
+                releaseYear: 2020,
+                rating: 3,
+                reviewText: "After many patches, the game has improved significantly. The story and world are compelling, but technical issues still persist.",
+                reviewerName: "Mike Rodriguez",
+                reviewDate: "2023-08-10"
+            },
+            4: {
+                gameTitle: "God of War Ragnar�k",
+                platform: "PS5",
+                genre: "Action",
+                releaseYear: 2022,
+                rating: 5,
+                reviewText: "A perfect conclusion to the Norse saga. The relationship between Kratos and Atreus is beautifully developed throughout the journey.",
+                reviewerName: "Emma Wilson",
+                reviewDate: "2023-05-12"
+            },
+            5: {
+                gameTitle: "Minecraft",
+                platform: "PC",
+                genre: "Simulation",
+                releaseYear: 2011,
+                rating: 4,
+                reviewText: "Still one of the most creative and relaxing games ever made. The possibilities are truly endless with this sandbox masterpiece.",
+                reviewerName: "Chris Thompson",
+                reviewDate: "2023-09-05"
+            },
+            6: {
+                gameTitle: "Super Mario Odyssey",
+                platform: "Nintendo Switch",
+                genre: "Platformer",
+                releaseYear: 2017,
+                rating: 5,
+                reviewText: "Pure joy in video game form. Every kingdom is a playground filled with clever platforming challenges and delightful surprises.",
+                reviewerName: "Lisa Park",
+                reviewDate: "2023-04-18"
+            },
+            7: {
+                gameTitle: "Red Dead Redemption 2",
+                platform: "Xbox Series X",
+                genre: "Action",
+                releaseYear: 2018,
+                rating: 4,
+                reviewText: "An incredibly detailed and immersive western experience. The story is gripping, though the pacing can be slow at times.",
+                reviewerName: "David Kim",
+                reviewDate: "2023-06-30"
+            },
+            8: {
+                gameTitle: "Hades",
+                platform: "PC",
+                genre: "Action",
+                releaseYear: 2020,
+                rating: 5,
+                reviewText: "Perfect blend of addictive gameplay, stellar storytelling, and gorgeous art. Every run feels meaningful and rewarding.",
+                reviewerName: "Jennifer Lee",
+                reviewDate: "2023-07-08"
+            },
+            9: {
+                gameTitle: "Animal Crossing: New Horizons",
+                platform: "Nintendo Switch",
+                genre: "Simulation",
+                releaseYear: 2020,
+                rating: 4,
+                reviewText: "A charming and peaceful escape that was perfect during lockdown. Building and decorating your island is incredibly satisfying.",
+                reviewerName: "Tom Brown",
+                reviewDate: "2023-05-25"
+            },
+            10: {
+                gameTitle: "The Witcher 3: Wild Hunt",
+                platform: "PC",
+                genre: "RPG",
+                releaseYear: 2015,
+                rating: 5,
+                reviewText: "One of the greatest RPGs ever created. The world is rich, the quests are meaningful, and Geralt's story is unforgettable.",
+                reviewerName: "Maria Garcia",
+                reviewDate: "2023-08-22"
+            },
+            11: {
+                gameTitle: "Among Us",
+                platform: "Mobile",
+                genre: "Puzzle",
+                releaseYear: 2018,
+                rating: 3,
+                reviewText: "Fun party game that became a cultural phenomenon. Great for playing with friends, but can get repetitive quickly.",
+                reviewerName: "Kevin White",
+                reviewDate: "2023-09-12"
+            },
+            12: {
+                gameTitle: "Fall Guys",
+                platform: "PC",
+                genre: "Action",
+                releaseYear: 2020,
+                rating: 3,
+                reviewText: "Colorful and chaotic battle royale that's entertaining in short bursts. The novelty wears off after extended play sessions.",
+                reviewerName: "Amy Davis",
+                reviewDate: "2023-07-15"
+            }
+        };
+
+        // Get game ID from URL parameter
+        function getGameId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // Load and display game review
+        function loadReview() {
+            const gameId = getGameId();
+            const review = gameReviews[gameId];
+
+            if (review) {
+                document.getElementById('reviewDetails').innerHTML = `
+                    <h2>${review.gameTitle}</h2>
+                    <p><strong>Platform:</strong> ${review.platform}</p>
+                    <p><strong>Genre:</strong> ${review.genre}</p>
+                    <p><strong>Release Year:</strong> ${review.releaseYear}</p>
+                    <p><strong>Rating:</strong> ${review.rating}/5</p>
+                    <p><strong>Review:</strong></p>
+                    <p>${review.reviewText}</p>
+                    <p><strong>Reviewer:</strong> ${review.reviewerName}</p>
+                    <p><strong>Review Date:</strong> ${review.reviewDate}</p>
+                `;
+            } else {
+                document.getElementById('reviewDetails').innerHTML = '<p>Review not found.</p>';
+            }
+        }
+
+        function editReview() {
+            const gameId = getGameId();
+            window.location.href = `edit.html?id=${gameId}`;
+        }
+
+        function deleteReview() {
+            if (confirm("Do you want to delete this item?")) {
+                alert("Item deleted!");
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Load the review when page loads
+        window.onload = loadReview;
+    </script>
+    </div>
+</body>
+</html>

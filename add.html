@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Game Review</title>
+    <link rel="stylesheet" href="my.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Game Review</h1>
+
+    <form id="reviewForm">
+        <label for="gameTitle">Game Title:</label>
+        <input type="text" id="gameTitle" name="gameTitle" required>
+        <br><br>
+
+        <label for="platform">Platform:</label>
+        <select id="platform" name="platform" required>
+            <option value="">Select Platform</option>
+            <option value="PC">PC</option>
+            <option value="PS5">PlayStation 5</option>
+            <option value="Xbox Series X">Xbox Series X</option>
+            <option value="Nintendo Switch">Nintendo Switch</option>
+            <option value="Mobile">Mobile</option>
+            <option value="PS4">PlayStation 4</option>
+            <option value="Xbox One">Xbox One</option>
+        </select>
+        <br><br>
+
+        <label for="genre">Genre:</label>
+        <select id="genre" name="genre" required>
+            <option value="">Select Genre</option>
+            <option value="Action">Action</option>
+            <option value="Adventure">Adventure</option>
+            <option value="RPG">RPG</option>
+            <option value="Strategy">Strategy</option>
+            <option value="Simulation">Simulation</option>
+            <option value="Sports">Sports</option>
+            <option value="Racing">Racing</option>
+            <option value="Horror">Horror</option>
+            <option value="Puzzle">Puzzle</option>
+            <option value="Platformer">Platformer</option>
+        </select>
+        <br><br>
+
+        <label for="releaseYear">Release Year:</label>
+        <input type="number" id="releaseYear" name="releaseYear" min="1970" max="2024" required>
+        <br><br>
+
+        <label for="rating">Rating (1-5):</label>
+        <input type="number" id="rating" name="rating" min="1" max="5" step="1" required>
+        <br><br>
+
+        <label for="reviewText">Review:</label>
+        <textarea id="reviewText" name="reviewText" rows="5" cols="50" required></textarea>
+        <br><br>
+
+        <label for="reviewerName">Reviewer Name:</label>
+        <input type="text" id="reviewerName" name="reviewerName" required>
+        <br><br>
+
+        <label for="reviewDate">Review Date:</label>
+        <input type="date" id="reviewDate" name="reviewDate" required>
+        <br><br>
+
+        <div class="action-buttons">
+            <button type="submit">Submit</button>
+            <button type="button" class="cancel-btn" onclick="window.location.href='index.html'">Cancel</button>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form values
+            const gameTitle = document.getElementById('gameTitle').value.trim();
+            const rating = parseInt(document.getElementById('rating').value);
+            const reviewerName = document.getElementById('reviewerName').value.trim();
+            const reviewText = document.getElementById('reviewText').value.trim();
+
+            let isValid = true;
+            let errorMessage = '';
+
+            // Validate Game Title (minimum 2 characters)
+            if (gameTitle.length < 2) {
+                isValid = false;
+                errorMessage += 'Game title must be at least 2 characters long.\n';
+            }
+
+            // Validate Rating (between 1-5)
+            if (isNaN(rating) || rating < 1 || rating > 5) {
+                isValid = false;
+                errorMessage += 'Rating must be between 1 and 5.\n';
+            }
+
+            // Validate Reviewer Name (minimum 2 characters)
+            if (reviewerName.length < 2) {
+                isValid = false;
+                errorMessage += 'Reviewer name must be at least 2 characters long.\n';
+            }
+
+            // Validate Review Text (minimum 10 characters)
+            if (reviewText.length < 10) {
+                isValid = false;
+                errorMessage += 'Review must be at least 10 characters long.\n';
+            }
+
+            if (isValid) {
+                alert('Review added!');
+                // In a real application, you would submit the data to a server here
+                window.location.href = 'index.html';
+            } else {
+                alert('Please fix the following errors:\n' + errorMessage);
+            }
+        });
+    </script>
+    </div>
+</body>
+</html>
