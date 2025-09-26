@@ -74,7 +74,6 @@
         document.getElementById('reviewForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Get form values
             const gameTitle = document.getElementById('gameTitle').value.trim();
             const rating = parseInt(document.getElementById('rating').value);
             const reviewerName = document.getElementById('reviewerName').value.trim();
@@ -109,7 +108,6 @@
 
             if (isValid) {
                 alert('Review added!');
-                // In a real application, you would submit the data to a server here
                 window.location.href = 'index.html';
             } else {
                 alert('Please fix the following errors:\n' + errorMessage);
